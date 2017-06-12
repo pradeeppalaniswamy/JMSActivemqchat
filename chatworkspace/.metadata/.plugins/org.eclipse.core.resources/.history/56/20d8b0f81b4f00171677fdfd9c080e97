@@ -1,0 +1,5 @@
+package jms.chat.App;
+
+public class JmsMessageSender {
+
+}
