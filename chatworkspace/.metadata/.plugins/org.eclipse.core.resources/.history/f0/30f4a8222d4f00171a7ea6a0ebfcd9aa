@@ -1,0 +1,32 @@
+package com.spring.jms;
+
+import java.io.IOException;
+
+import javax.jms.ConnectionFactory;
+import javax.jms.JMSException;
+import javax.jms.Topic;
+import javax.jms.TopicConnection;
+import javax.jms.TopicConnectionFactory;
+
+import org.springframework.context.ApplicationContext;
+import org.springframework.context.support.ClassPathXmlApplicationContext;
+import org.springframework.jms.core.JmsTemplate;
+
+public class BasicJmsChat {
+private Topic topic;
+private JmsTemplate chattemplate;
+private static String userid;
+
+
+public static void main(String[] args) throws JMSException,IOException {
+		ApplicationContext appcontext=new ClassPathXmlApplicationContext("app-context.xml");
+	BasicJmsChat bean = appcontext.getBean(BasicJmsChat.class);
+TopicConnectionFactory connectionFactory = (TopicConnectionFactory) bean.chattemplate.getConnectionFactory();
+
+	TopicConnection createTopicConnection = connectionFactory.createTopicConnection();
+	
+	
+	
+
+}
+}

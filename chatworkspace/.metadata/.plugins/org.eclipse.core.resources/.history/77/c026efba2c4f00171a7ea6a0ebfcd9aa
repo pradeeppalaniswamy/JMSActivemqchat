@@ -1,0 +1,11 @@
+package com.spring.jms;
+
+import javax.jms.Topic;
+
+import org.springframework.jms.core.JmsTemplate;
+
+public class BasicJmsChat {
+private Topic topic;
+private JmsTemplate chattemplate;
+private static String userid;
+}

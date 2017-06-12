@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xmlns:beans="http://www.springframework.org/schema/beans"
+  xmlns:context="http://www.springframework.org/schema/context"
+  xmlns:amq="http://activemq.apache.org/schema/core"
+  xmlns:jms="http://www.springframework.org/schema/jms" 
+  xsi:schemaLocation="http://www.springframework.org/schema/beans 
+    http://www.springframework.org/schema/beans/spring-beans.xsd 
+    http://www.springframework.org/schema/context 
+    http://www.springframework.org/schema/context/spring-context.xsd
+    http://activemq.apache.org/schema/core
+     http://activemq.apache.org/schema/core/activemq-core.xsd">
+ 
+ <amq:connectionFactory id="mqconnectionfactory" brokerURL="tcp://192.168.0.14:61616" />
+ <amq:topic id="topicpp" physicalName="chattopicpp"></amq:topic>
+
+ 
+ 
+   <!-- JmsTemplate Definition   -->
+  <bean id="jmsTemplate" class="org.springframework.jms.core.JmsTemplate">
+    <property name="connectionFactory" ref="mqconnectionfactory" />
+   
+  </bean>
+ 
+ <bean id="basicjmschat" class="com.spring.jms.BasicJmsChat">
+    <property name="chatJMStemplate" ref="jmsTemplate" />
+    <property name="topic" ref="topicpp" />
+  </bean>
+ 
+   <bean id="poiMessageListenerContainer" class="org.springframework.jms.listener.DefaultMessageListenerContainer">
+  <property name="connectionFactory" ref="mqconnectionfactory"/>
+   <property name="destination" ref="topicpp"/>
+    <property name="messageListner" ref="basicjmschat"/>
+     <property name="cuncurrentconsumers" value="1"/>
+  </bean>
+ 
+ 
+
+
+
+</beans>
