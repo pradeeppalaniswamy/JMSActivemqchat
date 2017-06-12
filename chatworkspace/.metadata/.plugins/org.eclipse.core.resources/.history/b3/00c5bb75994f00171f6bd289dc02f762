@@ -48,7 +48,7 @@ void publish(TopicConnection tc,Topic chattopic,String userid)throws JMSExceptio
 	tc.start();
 	BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
 	while(true)
-	{//System.out.print(userid+" : ");
+	{
 		String msgtosend= reader.readLine();
 		if(msgtosend.equals("exit"))
 		{	tc.close();
@@ -94,7 +94,7 @@ public void onMessage(Message message) {
 		try{
 			
 			String mes=((TextMessage) message).getText();
-			if(!mes.trim().startsWith(userid)){
+			if(!mes.startsWith("["+userid)){
 				
 				System.out.println(mes);
 			}

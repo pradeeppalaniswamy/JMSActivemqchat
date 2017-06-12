@@ -94,7 +94,7 @@ public void onMessage(Message message) {
 		try{
 			
 			String mes=((TextMessage) message).getText();
-			if(!mes.trim().startsWith(userid)){
+			if(!mes.startsWith(userid)){
 				
 				System.out.println(mes);
 			}
